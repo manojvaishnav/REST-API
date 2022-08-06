@@ -21,7 +21,7 @@ router.post('/book', async (req,res)=>{
 // ------------------------------------
 router.get('/book', async (req,res)=>{
     try{
-        const result = await bookDetail.find();
+        const result = await bookDetail.find().select({ _id:0 , __v:0});
         res.status(200).send(result);
     } catch(error){
         res.status(404).send(error)
@@ -34,7 +34,7 @@ router.get('/book', async (req,res)=>{
 router.get('/book/:name', async (req,res)=>{
     try{
         const name = req.params.name;
-        const result = await bookDetail.find({title:name});
+        const result = await bookDetail.find({title:name}).select({ _id:0 , __v:0});
         res.status(200).send(result);
     } catch(error){
         res.status(404).send(error)
